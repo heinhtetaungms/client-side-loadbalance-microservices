@@ -19,6 +19,7 @@ public class SayHelloServiceConfiguration {
                         );
         return ServiceInstanceListSupplier.builder()
                 .withBase(serviceInstanceListSupplier)
+                .withSameInstancePreference()
                 .build(context);
     }
 }
