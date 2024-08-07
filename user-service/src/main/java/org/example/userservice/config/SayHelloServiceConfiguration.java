@@ -1,6 +1,10 @@
 package org.example.userservice.config;
 
+import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.cloud.client.DefaultServiceInstance;
+import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.loadbalancer.core.RandomLoadBalancer;
+import org.springframework.cloud.loadbalancer.core.ReactorLoadBalancer;
 import org.springframework.cloud.loadbalancer.core.ServiceInstanceListSupplier;
 import org.springframework.cloud.loadbalancer.support.ServiceInstanceListSuppliers;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -20,5 +24,10 @@ public class SayHelloServiceConfiguration {
         return ServiceInstanceListSupplier.builder()
                 .withBase(serviceInstanceListSupplier)
                 .build(context);
+    }
+
+    @Bean
+    public ReactorLoadBalancer<ServiceInstance> randomLoadBalancer(ObjectProvider<ServiceInstanceListSupplier> serviceInstanceListSupplier) {
+        return new RandomLoadBalancer(serviceInstanceListSupplier, "sayhello-service");
     }
 }
