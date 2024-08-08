@@ -11,14 +11,14 @@ import org.springframework.context.annotation.Configuration;
 public class SayHelloServiceConfiguration {
 
     @Bean
-    public ServiceInstanceListSupplier serviceInstanceListSupplier(ConfigurableApplicationContext context) {
-        ServiceInstanceListSupplier serviceInstanceListSupplier = ServiceInstanceListSuppliers
+    public ServiceInstanceListSupplier sayHelloServiceInstanceListSupplier(ConfigurableApplicationContext context) {
+        ServiceInstanceListSupplier sayHelloServiceInstanceListSupplier = ServiceInstanceListSuppliers
                 .from("sayhello-service",
                         new DefaultServiceInstance("sayhello-instance1", "sayhello-service", "localhost", 8091, false),
                         new DefaultServiceInstance("sayhello-instance2", "sayhello-service", "localhost", 8092, false)
                         );
         return ServiceInstanceListSupplier.builder()
-                .withBase(serviceInstanceListSupplier)
+                .withBase(sayHelloServiceInstanceListSupplier)
                 .build(context);
     }
 }
